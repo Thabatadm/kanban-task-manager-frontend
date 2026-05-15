@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 64" width="280" height="64">
+    <!-- Icono: Columnas Kanban iguales -->
+    <rect x="8" y="12" width="10" height="40" rx="4" fill="#ffffff" />
+    <rect x="26" y="12" width="10" height="40" rx="4" fill="#ffffff" />
+    <rect x="44" y="12" width="10" height="40" rx="4" fill="#ffffff" />
+    
+    <!-- Icono: Onda (Flow) superpuesta -->
+    <path d="M 3 38 C 23 10, 43 60, 63 28" fill="none" stroke="#fbbf24" stroke-width="5" stroke-linecap="round" />
+    
+    <!-- Texto Kanban Flow -->
+    <text x="75" y="34" font-family="'Inter', system-ui, sans-serif" font-size="30" font-weight="800" fill="#ffffff" dominant-baseline="central">Kanban</text>
+    <text x="195" y="34" font-family="'Inter', system-ui, sans-serif" font-size="30" font-weight="400" font-style="italic" fill="#fbbf24" dominant-baseline="central">Flow</text>
+</svg>
