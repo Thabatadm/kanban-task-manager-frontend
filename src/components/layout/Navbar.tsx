@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/logo.svg';
 import { useAuth } from '../../hooks/useAuth'; 
-import lunaImg from '../../assets/moon-phase.png';
+import lunaImg from '../../assets/moon.png';
 import solImg from '../../assets/sun.png'; 
 import { useTheme } from '../../hooks/useTheme';
 
