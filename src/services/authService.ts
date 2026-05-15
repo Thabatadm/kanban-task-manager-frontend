@@ -27,7 +27,6 @@ export const authService = {
     localStorage.removeItem('token');
     localStorage.removeItem('userName');
     localStorage.removeItem('userLastName');
-
     window.location.href = '/login';
   },
 
@@ -44,4 +43,5 @@ export const authService = {
       lastName: lastName || ''
     };
   }
+
 };
