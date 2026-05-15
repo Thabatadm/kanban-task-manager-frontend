@@ -23,11 +23,17 @@ export const authService = {
     }
   },
 
-  logout: () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('userName');
-    localStorage.removeItem('userLastName');
-    window.location.href = '/login';
+  logout: async () => {
+    try {
+      await api.post('/auth/logout');
+    } catch (error) {
+      console.error("Error comunicando el logout al backend", error);
+    } finally {
+      localStorage.removeItem('token');
+      localStorage.removeItem('userName');
+      localStorage.removeItem('userLastName');
+      window.location.href = '/login';
+    }
   },
 
   getCurrentUser: () => {
