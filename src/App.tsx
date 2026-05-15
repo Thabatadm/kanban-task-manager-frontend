@@ -1,14 +1,30 @@
+import { Routes, Route, Navigate } from 'react-router-dom';
+import Login from './pages/login';
+import Layout from './components/layout/Layout';
+import { useAuth } from './hooks/useAuth';
+
 function App() {
+  const { isLoggedIn } = useAuth();
+
   return (
-    <div className="min-h-screen bg-slate-900 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-2xl shadow-2xl">
-        <h1 className="text-3xl font-extrabold text-indigo-600">
-          Kanban UI: System Online 🚀
-        </h1>
-        <p className="text-gray-500 mt-2">Tailwind v4 + React + TypeScript</p>
-      </div>
-    </div>
-  )
+    <Layout> 
+      <Routes>
+        <Route 
+          path="/login" 
+          element={isLoggedIn ? <Navigate to="/dashboard" /> : <Login />} 
+        />
+        <Route 
+          path="/" 
+          element={isLoggedIn ? <Navigate to="/dashboard" /> : <Login />} 
+        />
+        
+        <Route 
+          path="/dashboard" 
+          element={isLoggedIn ? <div className="text-black dark:text-white bg-slate-100 dark:bg-slate-950 text-2xl font-bold text-center mt-10 italic">Welcome to the Terminal Workspace</div> : <Navigate to="/login" />} 
+        />
+      </Routes>
+    </Layout>
+  );
 }
 
-export default App
+export default App;
