@@ -20,3 +20,19 @@ export interface AuthContextType {
   login: (token: string, userData: User) => void;
   logout: () => void;
 }
+
+export interface RegisterRequest {
+  name: string;
+  lastName: string;
+  email: string;
+  password: string;
+}
+
+export interface RegisterResponse {
+  id: number;
+  email: string;
+  name: string;
+  lastName: string;
+  enabled: boolean;
+  username: string; 
+}
