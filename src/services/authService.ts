@@ -1,5 +1,5 @@
 import api from '../api/axios'; 
-import type { LoginRequest, AuthResponse } from '../types/auth';
+import type { LoginRequest, AuthResponse, RegisterRequest, RegisterResponse } from '../types/auth';
 
 export const authService = {
 
@@ -44,10 +44,19 @@ export const authService = {
     if (!token) return null;
 
     return {
-      token,
       name: name || '',
       lastName: lastName || ''
     };
+  },
+
+  register: async (Credentials: RegisterRequest): Promise<RegisterResponse> => {
+    try {
+      const response = await api.post<RegisterResponse>('/auth/register', Credentials);
+      return response.data;
+    } catch (error) {
+      console.error("Error registering user", error);
+      throw error;
+    }
   }
 
 };
