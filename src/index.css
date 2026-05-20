@@ -1,3 +1,50 @@
 @import "tailwindcss";
 
+@theme {
+  /* 🏁 Fondos principales de la aplicación */
+  --color-bg-main-light: theme("colors.slate.100");
+  --color-bg-main-dark: theme("colors.slate.950");
+
+  /* 📦 Fondos de Tarjetas, Contenedores y Modales */
+  --color-bg-card-light: theme("colors.slate.200");
+  --color-bg-card-dark: theme("colors.slate.900");
+
+  /* 🛠️ Fondos internos secundarios (Iconos, sub-bloques) */
+  --color-bg-sub-light: theme("colors.slate.300");
+  --color-bg-sub-dark: theme("colors.slate.950");
+
+  /* ⚡ Color de Acento de la Marca (Cyberpunk Terminal) */
+  --color-brand-accent: theme("colors.amber.400");
+  --color-brand-accent-hover: theme("colors.amber.500");
+
+  /* 🌐 Bordes del Sistema */
+  --color-border-grid: theme("colors.slate.800");
+  --color-border-grid-light: theme("colors.slate.300");
+  
+  /* 🩻 Borde especial de luces de Neón/Terminal (antiguo indigo-500/20) */
+  --color-border-terminal: rgba(99, 102, 241, 0.2);
+
+  /* 🔤 Tipografías del Sistema */
+  --font-main: "Inter", sans-serif;
+  --font-terminal: "JetBrains Mono", "Fira Code", monospace;
+
+  /* 🏷️ Tamaños de Texto Semánticos (Customizados para tu Terminal) */
+  --text-title-main: 1.875rem /* 30px */;
+  --text-title-card: 1.25rem  /* 20px */;
+  --text-subtitle: 0.875rem   /* 14px */;
+  --text-terminal-sm: 0.625rem /* 10px */;
+
+  /* 🏋️ Pesos de Fuente Semánticos */
+  --font-weight-weight-title: 900;    /* Equivalente a font-black */
+  --font-weight-weight-body: 500;     /* Equivalente a font-medium */
+  --font-weight-weight-terminal: 700; /* Equivalente a font-bold */
+}
+
+/* 💡 Las variantes siempre van FUERA del bloque @theme en v4 */
 @custom-variant dark (&:where(.dark, .dark *));
+
+/* 🚀 Aplicación del Reset Global */
+body {
+  font-family: var(--font-main);
+  @apply bg-bg-main-light text-slate-900 dark:bg-bg-main-dark dark:text-slate-50 transition-colors duration-200;
+}
