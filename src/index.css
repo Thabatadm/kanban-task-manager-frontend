@@ -1,49 +1,98 @@
 @import "tailwindcss";
 
 @theme {
-  /* 🏁 Fondos principales de la aplicación */
   --color-bg-main-light: theme("colors.slate.100");
   --color-bg-main-dark: theme("colors.slate.950");
 
-  /* 📦 Fondos de Tarjetas, Contenedores y Modales */
   --color-bg-card-light: theme("colors.slate.200");
   --color-bg-card-dark: theme("colors.slate.900");
 
-  /* 🛠️ Fondos internos secundarios (Iconos, sub-bloques) */
   --color-bg-sub-light: theme("colors.slate.300");
   --color-bg-sub-dark: theme("colors.slate.950");
 
-  /* ⚡ Color de Acento de la Marca (Cyberpunk Terminal) */
   --color-brand-accent: theme("colors.amber.400");
+  --color-brand-accent-light: theme("colors.amber.600");
   --color-brand-accent-hover: theme("colors.amber.500");
 
-  /* 🌐 Bordes del Sistema */
   --color-border-grid: theme("colors.slate.800");
   --color-border-grid-light: theme("colors.slate.300");
-  
-  /* 🩻 Borde especial de luces de Neón/Terminal (antiguo indigo-500/20) */
+
   --color-border-terminal: rgba(99, 102, 241, 0.2);
 
-  /* 🔤 Tipografías del Sistema */
   --font-main: "Inter", sans-serif;
   --font-terminal: "JetBrains Mono", "Fira Code", monospace;
 
-  /* 🏷️ Tamaños de Texto Semánticos (Customizados para tu Terminal) */
-  --text-title-main: 1.875rem /* 30px */;
-  --text-title-card: 1.25rem  /* 20px */;
-  --text-subtitle: 0.875rem   /* 14px */;
-  --text-terminal-sm: 0.625rem /* 10px */;
+  --text-title-main: 1.875rem;
+  --text-title-card: 1.25rem;
+  --text-subtitle: 0.875rem;
+  --text-terminal-sm: 0.685rem;
 
-  /* 🏋️ Pesos de Fuente Semánticos */
-  --font-weight-weight-title: 900;    /* Equivalente a font-black */
-  --font-weight-weight-body: 500;     /* Equivalente a font-medium */
-  --font-weight-weight-terminal: 700; /* Equivalente a font-bold */
+  --font-weight-title: 900;
+  --font-weight-body: 500;
+  --font-weight-terminal: 700;
+
+  --color-grey-custom: theme("colors.slate.600");
+  --color-grey-custom-dark: theme("colors.slate.400");
 }
 
-/* 💡 Las variantes siempre van FUERA del bloque @theme en v4 */
+.cyberpunk-calendar-wrapper .fc {
+  --fc-border-color: var(--color-border-grid);
+  --fc-button-bg-color: transparent;
+  --fc-button-border-color: var(--color-border-grid);
+  --fc-button-text-color: var(--color-grey-custom-dark);
+  --fc-button-hover-bg-color: rgba(245, 158, 11, 0.1);
+  --fc-button-hover-border-color: var(--color-brand-accent);
+  --fc-button-active-bg-color: rgba(245, 158, 11, 0.2);
+  --fc-button-active-border-color: var(--color-brand-accent);
+
+  font-family: var(--font-terminal);
+}
+
+:root:not(.dark) .cyberpunk-calendar-wrapper .fc {
+  --fc-border-color: var(--color-border-grid-light);
+  --fc-button-border-color: var(--color-border-grid-light);
+  --fc-button-text-color: var(--color-grey-custom);
+}
+
+.cyberpunk-calendar-wrapper .fc-toolbar-title {
+  font-size: var(--text-subtitle) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: var(--font-weight-terminal);
+  color: var(--color-brand-accent);
+}
+
+.cyberpunk-calendar-wrapper .fc-col-header-cell {
+  padding: 10px 0;
+  text-transform: uppercase;
+  font-size: var(--text-terminal-sm);
+  letter-spacing: 0.05em;
+  background-color: rgba(148, 163, 184, 0.03);
+}
+.cyberpunk-calendar-wrapper .fc-daygrid-day-number {
+  font-size: var(--text-terminal-sm);
+  padding: 6px !important;
+  font-family: var(--font-terminal);
+}
+
+.cyberpunk-calendar-wrapper .fc-event {
+  cursor: pointer;
+  border-radius: 8px;
+  padding: 4px 6px;
+  margin: 2px 4px !important;
+  font-size: 10px;
+  font-weight: var(--font-weight-terminal);
+  border-left: 3px solid currentColor !important;
+  transition: all 0.15s ease-in-out;
+}
+
+.cyberpunk-calendar-wrapper .fc-event:hover {
+  filter: brightness(1.2) contrast(1.1);
+  transform: translateX(2px);
+}
+
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* 🚀 Aplicación del Reset Global */
 body {
   font-family: var(--font-main);
   @apply bg-bg-main-light text-slate-900 dark:bg-bg-main-dark dark:text-slate-50 transition-colors duration-200;
