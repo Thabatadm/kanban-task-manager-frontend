@@ -1,17 +1,20 @@
-import api from '../api/axios'; 
-import type { LoginRequest, AuthResponse, RegisterRequest, RegisterResponse } from '../types/auth';
+import api from "../api/axios";
+import type {
+  LoginRequest,
+  AuthResponse,
+  RegisterRequest,
+} from "../types/auth";
 
 export const authService = {
-
   login: async (credentials: LoginRequest): Promise<AuthResponse> => {
     try {
-      const response = await api.post<AuthResponse>('/auth/login', credentials);
+      const response = await api.post<AuthResponse>("/auth/login", credentials);
       const authData = response.data;
 
       if (authData.token) {
-        localStorage.setItem('token', authData.token);
-        localStorage.setItem('userName', authData.name);
-        localStorage.setItem('userLastName', authData.lastName);
+        localStorage.setItem("token", authData.token);
+        localStorage.setItem("userName", authData.name);
+        localStorage.setItem("userLastName", authData.lastName);
       }
 
       return authData;
@@ -19,44 +22,42 @@ export const authService = {
       if (error instanceof Error) {
         console.error("Auth Service Error:", error.message);
       }
-      throw error; 
+      throw error;
     }
   },
 
   logout: async () => {
     try {
-      await api.post('/auth/logout');
+      await api.post("/auth/logout");
     } catch (error) {
       console.error("Error comunicando el logout al backend", error);
     } finally {
-      localStorage.removeItem('token');
-      localStorage.removeItem('userName');
-      localStorage.removeItem('userLastName');
-      window.location.href = '/login';
+      localStorage.removeItem("token");
+      localStorage.removeItem("userName");
+      localStorage.removeItem("userLastName");
+      window.location.href = "/login";
     }
   },
 
   getCurrentUser: () => {
-    const name = localStorage.getItem('userName');
-    const lastName = localStorage.getItem('userLastName');
-    const token = localStorage.getItem('token');
+    const name = localStorage.getItem("userName");
+    const lastName = localStorage.getItem("userLastName");
+    const token = localStorage.getItem("token");
 
     if (!token) return null;
 
     return {
-      name: name || '',
-      lastName: lastName || ''
+      name: name || "",
+      lastName: lastName || "",
     };
   },
 
-  register: async (Credentials: RegisterRequest): Promise<RegisterResponse> => {
+  register: async (Credentials: RegisterRequest): Promise<void> => {
     try {
-      const response = await api.post<RegisterResponse>('/auth/register', Credentials);
-      return response.data;
+      await api.post<void>("/auth/register", Credentials);
     } catch (error) {
       console.error("Error registering user", error);
       throw error;
     }
-  }
-
+  },
 };
