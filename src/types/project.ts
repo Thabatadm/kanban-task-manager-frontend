@@ -1,8 +1,10 @@
+import type { User } from "./user";
+
 export interface Project {
   id: number;
   name: string;
   description: string;
-  createdAt: string; 
+  createdAt: string;
 }
 
 export interface CreateProjectRequest {
@@ -15,12 +17,12 @@ export interface ProjectResponse {
   id: number;
   name: string;
   description: string;
-  createdAt: string; 
+  createdAt: string;
   developers: {
     id: number;
     name: string;
     lastName: string;
-    email: string;  
+    email: string;
   }[];
 }
 
@@ -30,13 +32,23 @@ export interface UpdateProjectRequest {
   developerIds?: number[];
 }
 
-
 export interface ProjectMember {
   id: number;
   name: string;
   lastName: string;
-  email: string;  
+  email: string;
 }
 
+export interface ProjectUserBackend {
+  id?: number;
+  role: "MASTER" | "DEVELOPER";
+  user?: User;
+  userId: number;
+}
+
+export interface ExtendedProject extends Project {
+  projectUsers?: ProjectUserBackend[];
+  members?: ProjectUserBackend[];
+}
 
 export type GetMembersResponse = ProjectMember[];

@@ -34,5 +34,5 @@ export interface RegisterResponse {
   name: string;
   lastName: string;
   enabled: boolean;
-  username: string; 
+  username: string;
 }

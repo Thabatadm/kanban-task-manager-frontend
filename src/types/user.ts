@@ -1,7 +1,6 @@
 import type { Project } from "./project";
 
-export type ProjectRole = 'MASTER' | 'DEVELOPER';
-
+export type ProjectRole = "MASTER" | "DEVELOPER";
 
 export interface UpdateUserRequest {
   name: string;
@@ -16,8 +15,8 @@ export interface GrantedAuthority {
 
 export interface ProjectUser {
   id: number;
-  project: Project; 
-  role: ProjectRole; 
+  project: Project;
+  role: ProjectRole;
 }
 
 export interface User {
@@ -32,9 +31,8 @@ export interface User {
   accountNonLocked: boolean;
   credentialsNonExpired: boolean;
   authorities: { authority: string }[];
-  projects: ProjectUser[]; 
+  projects: ProjectUser[];
 }
-
 
 export interface UpdateUserResponse {
   id: number;
@@ -42,9 +40,7 @@ export interface UpdateUserResponse {
   name: string;
   lastName: string;
   username: string;
-
 }
-
 
 export interface UserProfile {
   id: number;
@@ -52,11 +48,15 @@ export interface UserProfile {
   name: string;
   lastName: string;
   username: string;
-  projects: Project[]; 
+  enabled?: boolean;
+  projects: {
+    id: number;
+    role: string;
+    project: {
+      id: number;
+      name: string;
+      description?: string;
+      createdAt: string;
+    };
+  }[];
 }
-
-
-
-
-
-
