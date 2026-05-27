@@ -5,24 +5,24 @@ export const Footer: React.FC = () => {
 
   return (
     <footer className="w-full mt-auto bg-bg-sub-dark pt-8 pb-6 border-t border-dashed border-border-grid/30 font-terminal">
-      <div className="px-6 grid grid-cols-1 md:grid-cols-3 text-[11px] text-white/70 uppercase tracking-wider text-left">
-        <div className="p-4 flex flex-col gap-2 md:justify-self-center items-start w-full max-w-[200px]">
+      <div className="px-6 grid grid-cols-3 gap-x-6 md:gap-x-12 divide-x divide-border-grid/30 text-[11px] text-white/70 uppercase tracking-wider text-center items-center py-2">
+        <div className="p-2 md:p-4 flex flex-col gap-2 text-center w-full">
           <span className="text-[9px] text-white/40 font-bold tracking-widest block mb-1">
             // CORE_STACK
           </span>
-          <span>React Architecture</span>
-          <span>Tailwind CSS v4</span>
-          <span>RESTful Backend API</span>
+          <span className="truncate w-full">React Architecture</span>
+          <span className="truncate w-full">Tailwind CSS v4</span>
+          <span className="truncate w-full">RESTful API</span>
         </div>
-        <div className="p-4 flex flex-col gap-1 md:justify-self-center md:pl-12 items-start w-full max-w-[280px]">
+        <div className="p-2 md:p-4 pl-6 md:pl-12 flex flex-col gap-1 text-center w-full">
           <span className="text-[9px] text-white/40 font-bold tracking-widest">
             // AUTHOR_SIGNATURE
           </span>
-          <div className="text-xs font-bold text-white/50 tracking-normal pt-0.5">
+          <div className="text-xs font-bold text-white/50 tracking-normal pt-0.5 break-words w-full">
             Thabata Denise Monteiro da Silva
           </div>
         </div>
-        <div className="p-4 flex flex-col gap-3 md:justify-self-center md:pl-12 items-start w-full max-w-[220px]">
+        <div className="p-2 md:p-4 pl-6 md:pl-12 flex flex-col gap-3 text-center w-full">
           <span className="text-[9px] text-white/40 font-bold tracking-widest mb-1">
             // CONTACT_ME
           </span>

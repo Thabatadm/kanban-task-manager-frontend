@@ -18,7 +18,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <aside className="w-64 min-h-screen bg-bg-main-dark border-r border-border-grid p-6 flex flex-col">
+    <aside className="w-64 min-h-screen bg-bg-main-dark border-r border-border-grid p-6 hidden md:flex flex-col">
       <nav className="space-y-4">
         {menuItems.map((item) => {
           const isActive = location.pathname === item.path;
