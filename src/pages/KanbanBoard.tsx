@@ -20,10 +20,30 @@ import {
 import { Button } from "../components/ui/Button";
 
 const COLUMNS: { id: CardStatus; title: string; color: string }[] = [
-  { id: "TO_DO", title: "Backlog / To Do", color: "border-slate-500/30 text-slate-600 dark:text-slate-400 raw-color-slate-500" },
-  { id: "IN_PROGRESS", title: "In Progress", color: "border-indigo-500/30 text-indigo-600 dark:text-indigo-400 raw-color-indigo-500" },
-  { id: "REVIEW", title: "Under Review", color: "border-orange-500/30 text-orange-600 dark:text-orange-400 raw-color-orange-500" },
-  { id: "DONE", title: "System Done", color: "border-emerald-500/30 text-emerald-600 dark:text-emerald-400 raw-color-emerald-500" },
+  {
+    id: "TO_DO",
+    title: "Backlog / To Do",
+    color:
+      "border-slate-500/30 text-slate-600 dark:text-slate-400 raw-color-slate-500",
+  },
+  {
+    id: "IN_PROGRESS",
+    title: "In Progress",
+    color:
+      "border-indigo-500/30 text-indigo-600 dark:text-indigo-400 raw-color-indigo-500",
+  },
+  {
+    id: "REVIEW",
+    title: "Under Review",
+    color:
+      "border-orange-500/30 text-orange-600 dark:text-orange-400 raw-color-orange-500",
+  },
+  {
+    id: "DONE",
+    title: "System Done",
+    color:
+      "border-emerald-500/30 text-emerald-600 dark:text-emerald-400 raw-color-emerald-500",
+  },
 ];
 
 export const KanbanBoard: React.FC = () => {
@@ -63,13 +83,17 @@ export const KanbanBoard: React.FC = () => {
       try {
         await loadCards();
         const allProjects = await projectService.getProjects();
-        const currentProject = allProjects.find((p) => p.id === numericProjectId);
+        const currentProject = allProjects.find(
+          (p) => p.id === numericProjectId,
+        );
         if (currentProject) {
           setProject(currentProject);
         }
       } catch (err) {
         console.error("Critical board/project sync crash:", err);
-        setError("CRITICAL CORE FAILURE: Failure syncing cluster stream dependencies.");
+        setError(
+          "CRITICAL CORE FAILURE: Failure syncing cluster stream dependencies.",
+        );
       }
     };
 
@@ -80,27 +104,42 @@ export const KanbanBoard: React.FC = () => {
     const { destination, source, draggableId } = result;
 
     if (!destination) return;
-    if (destination.droppableId === source.droppableId && destination.index === source.index) return;
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    )
+      return;
 
     const sourceStatus = source.droppableId as CardStatus;
     const destStatus = destination.droppableId as CardStatus;
     const cardId = Number(draggableId);
     const previousCards = [...cards];
 
-    const sourceColumn = cards.filter(c => c.status === sourceStatus).sort((a, b) => a.position - b.position);
-    const destColumn = sourceStatus === destStatus ? sourceColumn : cards.filter(c => c.status === destStatus).sort((a, b) => a.position - b.position);
-  
+    const sourceColumn = cards
+      .filter((c) => c.status === sourceStatus)
+      .sort((a, b) => a.position - b.position);
+    const destColumn =
+      sourceStatus === destStatus
+        ? sourceColumn
+        : cards
+            .filter((c) => c.status === destStatus)
+            .sort((a, b) => a.position - b.position);
+
     const [movedCard] = sourceColumn.splice(source.index, 1);
     movedCard.status = destStatus;
 
     destColumn.splice(destination.index, 0, movedCard);
 
-    sourceColumn.forEach((card, idx) => { card.position = idx; });
-    destColumn.forEach((card, idx) => { card.position = idx; });
+    sourceColumn.forEach((card, idx) => {
+      card.position = idx;
+    });
+    destColumn.forEach((card, idx) => {
+      card.position = idx;
+    });
 
-    const updatedCards = cards.map(c => {
-      const matchInSource = sourceColumn.find(sc => sc.id === c.id);
-      const matchInDest = destColumn.find(dc => dc.id === c.id);
+    const updatedCards = cards.map((c) => {
+      const matchInSource = sourceColumn.find((sc) => sc.id === c.id);
+      const matchInDest = destColumn.find((dc) => dc.id === c.id);
       return matchInDest || matchInSource || c;
     });
 
@@ -116,7 +155,9 @@ export const KanbanBoard: React.FC = () => {
       setCards(data.sort((a, b) => a.position - b.position));
     } catch (err) {
       console.error("Drag transmission failed, reverting mutation:", err);
-      setError("MUTATION REJECTED: Server dropped position synchronization packets.");
+      setError(
+        "MUTATION REJECTED: Server dropped position synchronization packets.",
+      );
       setCards(previousCards);
     }
   };
@@ -137,7 +178,11 @@ export const KanbanBoard: React.FC = () => {
         <div className="p-4 bg-red-500/10 border border-red-500/30 text-red-400 text-xs rounded-2xl max-w-md text-center uppercase tracking-widest mb-4">
           INVALID PARAMETER: No project node specified in mainframe link.
         </div>
-        <Button variant="secondary" onClick={() => navigate("/projects")} className="text-xs uppercase tracking-wider font-title">
+        <Button
+          variant="secondary"
+          onClick={() => navigate("/projects")}
+          className="text-xs uppercase tracking-wider font-title"
+        >
           <ArrowLeft size={14} className="mr-2" /> Return to Workspace
         </Button>
       </div>
@@ -147,7 +192,11 @@ export const KanbanBoard: React.FC = () => {
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[500px] gap-3 font-terminal">
-        <Loader2 className="animate-spin text-brand-accent" size={40} strokeWidth={2.5} />
+        <Loader2
+          className="animate-spin text-brand-accent"
+          size={40}
+          strokeWidth={2.5}
+        />
         <p className="text-xs text-grey-custom uppercase tracking-[0.2em] animate-pulse">
           Synchronizing cluster data streams...
         </p>
@@ -164,7 +213,10 @@ export const KanbanBoard: React.FC = () => {
             className="p-2.5 border border-border-grid-light dark:border-slate-800 hover:border-brand-accent/50 bg-bg-card-light dark:bg-bg-card-dark rounded-xl text-grey-custom hover:text-brand-accent transition-all duration-200 group"
             title="Return to projects matrix"
           >
-            <ArrowLeft size={16} className="group-hover:-translate-x-0.5 transition-transform" />
+            <ArrowLeft
+              size={16}
+              className="group-hover:-translate-x-0.5 transition-transform"
+            />
           </button>
           <div>
             <div className="flex items-center gap-2 text-[10px] font-terminal text-grey-custom dark:text-grey-custom-dark uppercase tracking-widest mb-0.5">
@@ -173,9 +225,14 @@ export const KanbanBoard: React.FC = () => {
             </div>
             <h1 className="text-title-main font-title text-black dark:text-white uppercase tracking-tighter max-w-xl truncate">
               {project ? (
-                <>Project / <span className="text-brand-accent">{project.name}</span></>
+                <>
+                  Project /{" "}
+                  <span className="text-brand-accent">{project.name}</span>
+                </>
               ) : (
-                <>Task <span className="text-grey-custom/40">Workspace</span></>
+                <>
+                  Task <span className="text-grey-custom/40">Workspace</span>
+                </>
               )}
             </h1>
           </div>
@@ -198,9 +255,15 @@ export const KanbanBoard: React.FC = () => {
 
       <div className="flex justify-end mt-2">
         <button
-          onClick={() => project && navigate(`/projects/${project.id}/calendar`)}
-          className="flex items-center gap-2 px-5 py-3 border border-dashed border-border-grid-light dark:border-border-grid hover:border-brand-accent/60 bg-bg-card-light dark:bg-bg-card-dark text-grey-custom dark:text-grey-custom-dark hover:text-brand-accent rounded-xl text-xs font-terminal uppercase tracking-wider transition-all duration-200 group shadow-sm shadow-black/5">
-          <Calendar size={14} className="group-hover:rotate-6 transition-transform" />
+          onClick={() =>
+            project && navigate(`/projects/${project.id}/calendar`)
+          }
+          className="flex items-center gap-2 px-5 py-3 border border-dashed border-border-grid-light dark:border-border-grid hover:border-brand-accent/60 bg-bg-card-light dark:bg-bg-card-dark text-grey-custom dark:text-grey-custom-dark hover:text-brand-accent rounded-xl text-xs font-terminal uppercase tracking-wider transition-all duration-200 group shadow-sm shadow-black/5"
+        >
+          <Calendar
+            size={14}
+            className="group-hover:rotate-6 transition-transform"
+          />
           <span>Open Global Schedule Matrix</span>
         </button>
       </div>
@@ -230,7 +293,9 @@ export const KanbanBoard: React.FC = () => {
                   >
                     <div className="flex items-center justify-between mb-4 pb-2 border-b border-dashed border-border-grid-light dark:border-border-grid/40 flex-shrink-0">
                       <div className="flex items-center gap-2">
-                        <span className={`text-xs font-title uppercase tracking-tighter ${column.color.split(" ")[1]}`}>
+                        <span
+                          className={`text-xs font-title uppercase tracking-tighter ${column.color.split(" ")[1]}`}
+                        >
                           {column.title}
                         </span>
                         <span className="text-[10px] font-terminal px-1.5 py-0.2 bg-bg-sub-light dark:bg-bg-sub-dark border dark:border-slate-800 rounded-md text-grey-custom">
@@ -246,10 +311,13 @@ export const KanbanBoard: React.FC = () => {
                         <Plus size={14} />
                       </button>
                     </div>
-
-                    <div className="flex flex-col gap-3 overflow-y-auto pr-1 flex-1 min-h-[150px] custom-scrollbar">
+                    <div className="flex flex-col gap-3 overflow-y-auto pr-1 flex-1 min-h-[150px] [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
                       {columnCards.map((card, index) => (
-                        <Draggable key={card.id} draggableId={String(card.id)} index={index}>
+                        <Draggable
+                          key={card.id}
+                          draggableId={String(card.id)}
+                          index={index}
+                        >
                           {(draggableProvided) => (
                             <div
                               ref={draggableProvided.innerRef}
@@ -265,7 +333,10 @@ export const KanbanBoard: React.FC = () => {
                       {provided.placeholder}
                       {columnCards.length === 0 && (
                         <div className="flex flex-col items-center justify-center py-10 px-4 border border-dashed border-border-grid-light dark:border-border-grid/20 rounded-xl bg-bg-main-light/20 dark:bg-bg-main-dark/5">
-                          <Layers size={16} className="text-grey-custom/30 mb-1" />
+                          <Layers
+                            size={16}
+                            className="text-grey-custom/30 mb-1"
+                          />
                           <p className="text-[10px] font-body text-grey-custom/50 italic text-center">
                             No active units in sector.
                           </p>

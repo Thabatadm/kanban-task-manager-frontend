@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button } from "../ui/Button";
 import { cardService } from "../../services/cardService";
-// CAMBIADO: Añadimos 'Cpu' a las importaciones de lucide-react para las marcas de tiempo del sistema
+import { useAuth } from "../../hooks/useAuth";
 import {
   X,
   Trash2,
@@ -35,6 +35,7 @@ export const CardDetailModal: React.FC<CardDetailModalProps> = ({
   onCardUpdated,
   projectMembers = [],
 }) => {
+  const { user } = useAuth();
   const [title, setTitle] = useState(card.title);
   const [description, setDescription] = useState(card.description || "");
   const [status, setStatus] = useState<CardStatus>(card.status);
@@ -55,6 +56,13 @@ export const CardDetailModal: React.FC<CardDetailModalProps> = ({
 
     return `${year}-${month}-${day}`;
   });
+
+  const currentUserEmail = user?.email || "";
+  const currentMember = projectMembers.find(
+    (member) =>
+      member.user?.email?.toLowerCase() === currentUserEmail.toLowerCase(),
+  );
+  const isMaster = currentMember?.role === "MASTER";
 
   if (!isOpen) return null;
 
@@ -109,6 +117,13 @@ export const CardDetailModal: React.FC<CardDetailModalProps> = ({
   };
 
   const handleDelete = async () => {
+    if (!isMaster) {
+      setError(
+        "SECURITY VIOLATION: Only MASTER agents can invoke purge protocols.",
+      );
+      return;
+    }
+
     if (
       !window.confirm(
         "CRITICAL PROTOCOL: Are you certain you want to purge this record unit?",
@@ -282,15 +297,19 @@ export const CardDetailModal: React.FC<CardDetailModalProps> = ({
             </div>
           </div>
           <div className="flex justify-between items-center pt-4 border-t border-dashed border-border-grid-light dark:border-border-grid/40">
-            <button
-              type="button"
-              disabled={loading}
-              onClick={handleDelete}
-              className="flex items-center gap-1.5 px-3 py-2 border border-transparent hover:border-red-500/20 bg-red-500/10 hover:bg-red-500/20 text-red-400 rounded-xl text-xs font-title uppercase tracking-wider transition-all"
-            >
-              <Trash2 size={13} />
-              Purge Unit
-            </button>
+            {isMaster ? (
+              <button
+                type="button"
+                disabled={loading}
+                onClick={handleDelete}
+                className="flex items-center gap-1.5 px-3 py-2 border border-transparent hover:border-red-500/20 bg-red-500/10 hover:bg-red-500/20 text-red-400 rounded-xl text-xs font-title uppercase tracking-wider transition-all"
+              >
+                <Trash2 size={13} />
+                Purge Unit
+              </button>
+            ) : (
+              <div />
+            )}
 
             <div className="flex gap-2">
               <Button

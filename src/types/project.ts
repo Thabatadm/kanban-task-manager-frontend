@@ -51,4 +51,9 @@ export interface ExtendedProject extends Project {
   members?: ProjectUserBackend[];
 }
 
+export interface ExtendedProject extends Project {
+  projectUsers?: ProjectUserBackend[];
+  members?: ProjectUserBackend[];
+}
+
 export type GetMembersResponse = ProjectMember[];

@@ -26,10 +26,10 @@ const Login = () => {
 
     try {
       const response = await authService.login({ email, password });
-
       contextLogin(response.token, {
         name: response.name,
         lastName: response.lastName,
+        email: email,
       });
 
       navigate("/dashboard");

@@ -3,6 +3,7 @@ import { Button } from "../ui/Button";
 import { X, Shield, Edit3, Calendar, FileText, Users } from "lucide-react";
 import type { ExtendedProject, ProjectUserBackend } from "../../types/project";
 import CreateProjectModal from "./CreateProject";
+import { useAuth } from "../../hooks/useAuth";
 
 interface ProjectDetailModalProps {
   project: ExtendedProject;
@@ -18,9 +19,24 @@ const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
   onProjectUpdated,
 }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
+  const { user } = useAuth();
 
   const projectMembers: ProjectUserBackend[] =
     project.projectUsers || project.members || [];
+
+  console.log("=== COMPROBACIÓN DE SESIÓN ===");
+  console.log("Email guardado en AuthContext (Tú):", user?.email);
+  console.log("Objeto 'user' completo de la sesión:", user);
+  console.log(
+    "Emails de los miembros en el Proyecto:",
+    projectMembers.map((m) => m.user?.email),
+  );
+  const currentUserEmail = user?.email || "";
+  const currentMember = projectMembers.find(
+    (member) =>
+      member.user?.email?.toLowerCase() === currentUserEmail.toLowerCase(),
+  );
+  const isMaster = currentMember?.role === "MASTER";
 
   if (!isOpen) return null;
 
@@ -69,17 +85,18 @@ const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                     "No description logs detailed inside this workspace node."}
                 </p>
               </div>
-
-              <div className="pt-4 flex-shrink-0">
-                <Button
-                  variant="secondary"
-                  className="w-full flex items-center justify-center gap-2 text-terminal-sm uppercase tracking-widest py-3 border border-border-grid dark:border-slate-700/60 font-title"
-                  onClick={() => setIsEditModalOpen(true)}
-                >
-                  <Edit3 size={14} />
-                  Modify Workspace Config
-                </Button>
-              </div>
+              {isMaster && (
+                <div className="pt-4 flex-shrink-0">
+                  <Button
+                    variant="secondary"
+                    className="w-full flex items-center justify-center gap-2 text-terminal-sm uppercase tracking-widest py-3 border border-border-grid dark:border-slate-700/60 font-title"
+                    onClick={() => setIsEditModalOpen(true)}
+                  >
+                    <Edit3 size={14} />
+                    Modify Workspace Config
+                  </Button>
+                </div>
+              )}
             </div>
 
             <div className="md:col-span-2 flex flex-col h-full min-h-[300px]">
@@ -128,8 +145,7 @@ const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
           </div>
         </div>
       </div>
-
-      {isEditModalOpen && (
+      {isEditModalOpen && isMaster && (
         <CreateProjectModal
           isOpen={isEditModalOpen}
           projectToEdit={project}
