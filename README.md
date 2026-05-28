@@ -1,73 +1,73 @@
-# React + TypeScript + Vite
+# 🎨 Kanban Task Manager - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, high-performance, and fully responsive Kanban board dashboard built with **React**, **TypeScript**, and **Tailwind CSS**. This application delivers a fluid user experience with context-driven state management, full mobile adaptation, dual-theming, and interactive calendar workflows.
 
-Currently, two official plugins are available:
+The application consumes the production RESTful API deployed on **Render** and connects seamlessly to a **Supabase PostgreSQL** cluster.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+# 🚀 Live Demo & Production Environment
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Experience the live application directly in your browser:
 
-## Expanding the ESLint configuration
+👉 [Launch Live Application on Vercel](https://kanban-task-manager-frontend.vercel.app/)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+# 🧪 Instant Testing Credentials
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+To explore the **Role-Based Access Control (RBAC)** matrices and layout features immediately without registering a new account, use the following pre-configured sandbox profile:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+* **Email:** `anamaria@example.co`
+* **Password:** `pass1234`
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 📊 Pre-Loaded Project Scenarios (RBAC Showcase)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Once logged in with Ana Maria's account, you will have access to two pre-loaded operational workspaces designed to test the security restrictions of the API:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+1. **`NEON HYDRA` [Role: DEVELOPER]**
+   * **Behavior:** Structural adjustments are locked. You **cannot** edit the project configurations, manage members, or delete tasks.
+   * **Allowed Actions:** You can freely drag, drop, update, and modify task details to simulate daily sprint progress.
+2. **`AetherScan Alpha` [Role: OWNER / MASTER]**
+   * **Behavior:** Full administrative privileges are granted. You have unrestricted access to create, update, move, or permanently delete tasks, projects, and member rosters.
+
+> 💡 *Note: While this profile is provided for quick evaluation, you can also register a brand-new user from scratch to initialize empty workspaces.*
+
+---
+
+# ✨ Key Features
+
+* **Advanced Kanban Workflow:** Interactive task lifecycle tracking with real-time feedback.
+* **Global Project Calendar:** A dedicated calendar view for each project that aggregates task deadlines globally, allowing users to inspect and access specific cards directly from the calendar grid.
+* **Responsive Mobile-First UI:** Completely refactored modal layouts, adaptive data grids, and fluid touch paddings optimized for cross-device viewports and virtual keyboards.
+* **Dynamic System Theming:** Native support for **Light Mode** and **Dark Mode** terminal aesthetics with persistent configuration storage.
+
+---
+
+# 🛠️ Tech Stack & Architecture
+
+- **Core Framework:** React 18 + TypeScript (Strict Type Safety)
+- **Styling Pipeline:** Tailwind CSS (Responsive Utility-First Design)
+- **API Client:** Axios (Interceptors for Bearer Token injection)
+- **Routing:** React Router DOM
+- **State & Context:** React Context API for decoupled global workflows.
+
+### 📂 Directory Architecture
+The project follows a modular, clean-architecture pattern separating atomic UI elements from business logic layers:
+
+```bash
+src/
+├── api/
+│   └── axios.ts            # Axios global client instance & interceptors
+├── assets/                 # Icons, logos, and static brand themes
+├── components/
+│   ├── card/               # Card components and detailed task modals
+│   ├── layout/             # Shared shell views (Navbar, Sidebar, Footer, Layout wrapper)
+│   ├── profile/            # Profile settings and management dialogs
+│   ├── projects/           # Project wizards and overview interfaces
+│   └── ui/                 # Atomic design tokens (Fluid responsive Buttons & Inputs)
+├── context/                # Context API definitions and state providers (Auth, Theme)
+├── hooks/                  # Logic abstractions wrapping contexts (useAuth, useTheme)
+├── pages/                  # Route-level view components (KanbanBoard, KanbanCalendar, Login...)
+├── services/               # API endpoint connection layers grouped by scope
+└── types/                  # Strict TypeScript interfaces and type declaration definitions
