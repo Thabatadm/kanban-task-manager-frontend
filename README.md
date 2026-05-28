@@ -2,7 +2,8 @@
 
 A modern, high-performance, and fully responsive Kanban board dashboard built with **React**, **TypeScript**, and **Tailwind CSS**. This application delivers a fluid user experience with context-driven state management, full mobile adaptation, dual-theming, and interactive calendar workflows.
 
-The application consumes the production RESTful API deployed on **Render** and connects seamlessly to a **Supabase PostgreSQL** cluster.
+The application consumes a production RESTful API deployed on **Render**. You can explore the source code of the API here:
+👉 [Backend Repository (Spring Boot)](https://github.com/Thabatadm/Backend-de-la-API-del-gestor-de-tareas-Kanban)
 
 ---
 
