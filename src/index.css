@@ -22,10 +22,10 @@
   --font-main: "Inter", sans-serif;
   --font-terminal: "JetBrains Mono", "Fira Code", monospace;
 
-  --text-title-main: 1.875rem;
-  --text-title-card: 1.25rem;
-  --text-subtitle: 0.875rem;
-  --text-terminal-sm: 0.685rem;
+  --text-title-main: fluid(1.35rem, 1.875rem);   
+  --text-title-card: fluid(1.1rem, 1.25rem);    
+  --text-subtitle: fluid(0.75rem, 0.875rem);    
+  --text-terminal-sm: fluid(0.625rem, 0.685rem); 
 
   --font-weight-title: 900;
   --font-weight-body: 500;
@@ -63,33 +63,39 @@
 }
 
 .cyberpunk-calendar-wrapper .fc-col-header-cell {
-  padding: 10px 0;
+  padding: fluid(6px, 10px) 0;
   text-transform: uppercase;
   font-size: var(--text-terminal-sm);
   letter-spacing: 0.05em;
   background-color: rgba(148, 163, 184, 0.03);
 }
+
 .cyberpunk-calendar-wrapper .fc-daygrid-day-number {
   font-size: var(--text-terminal-sm);
-  padding: 6px !important;
+  padding: fluid(4px, 6px) !important; 
   font-family: var(--font-terminal);
 }
 
 .cyberpunk-calendar-wrapper .fc-event {
   cursor: pointer;
-  border-radius: 8px;
-  padding: 4px 6px;
-  margin: 2px 4px !important;
-  font-size: 10px;
+  border-radius: 6px; 
+  padding: 3px fluid(4px, 6px);
+  margin: 1px fluid(2px, 4px) !important;
+  font-size: var(--text-terminal-sm); 
   font-weight: var(--font-weight-terminal);
   border-left: 3px solid currentColor !important;
   transition: all 0.15s ease-in-out;
+  
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; 
 }
 
 .cyberpunk-calendar-wrapper .fc-event:hover {
   filter: brightness(1.2) contrast(1.1);
   transform: translateX(2px);
 }
+
 
 @custom-variant dark (&:where(.dark, .dark *));
 

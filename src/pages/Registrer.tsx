@@ -80,10 +80,10 @@ export const Register = () => {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen flex items-center justify-center bg-bg-main-light dark:bg-bg-main-dark pt-20 p-4 font-main">
-        <div className="w-full max-w-lg bg-bg-card-light dark:bg-bg-card-dark border border-border-grid-light dark:border-border-grid/60 rounded-3xl p-8 sm:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.05)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.3)] animate-fade-in">
-          <div className="text-center mb-8">
-            <div className="inline-block p-4 rounded-2xl bg-brand-accent/10 border border-brand-accent/20 text-brand-accent mb-4 shadow-lg shadow-brand-accent/5">
+      <div className="min-h-screen flex items-center justify-center bg-bg-main-light dark:bg-bg-main-dark pt-24 p-4 font-main w-full box-border">
+        <div className="w-full max-w-lg bg-bg-card-light dark:bg-bg-card-dark border border-border-grid-light dark:border-border-grid/60 rounded-3xl p-6 sm:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.05)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.3)] animate-fade-in box-border min-w-0">
+          <div className="text-center mb-8 w-full">
+            <div className="inline-block p-4 rounded-2xl bg-brand-accent/10 border border-brand-accent/20 text-brand-accent mb-4 shadow-lg shadow-brand-accent/5 flex-shrink-0">
               <svg
                 className="w-8 h-8"
                 fill="none"
@@ -98,17 +98,16 @@ export const Register = () => {
                 />
               </svg>
             </div>
-
-            <h1 className="text-title-main font-title text-black dark:text-white tracking-wider uppercase">
+            <h1 className="text-xl sm:text-2xl md:text-title-main font-title text-black dark:text-white tracking-wider uppercase w-full break-words">
               Terminal <span className="text-brand-accent">Register</span>
             </h1>
-            <p className="text-xs font-terminal text-grey-custom dark:text-grey-custom-dark mt-2 italic uppercase tracking-widest">
+            <p className="text-[10px] sm:text-xs font-terminal text-grey-custom dark:text-grey-custom-dark mt-2 italic uppercase tracking-widest w-full break-words">
               Create New Operator Profile
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="flex flex-col sm:flex-row gap-4">
+          <form onSubmit={handleSubmit} className="space-y-4 w-full">
+            <div className="flex flex-col sm:flex-row gap-4 w-full">
               <Input
                 label="First Name"
                 type="text"
@@ -139,7 +138,7 @@ export const Register = () => {
               required
             />
 
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-4 w-full">
               <Input
                 label="Access Key"
                 type="password"
@@ -161,25 +160,26 @@ export const Register = () => {
             </div>
 
             {error && (
-              <div className="p-3 bg-red-500/10 border border-red-500/30 text-red-400 text-terminal-sm font-terminal rounded-xl text-center font-bold animate-pulse uppercase tracking-widest">
+              <div className="p-3 bg-red-500/10 border border-red-500/30 text-red-400 text-terminal-sm font-terminal rounded-xl text-center font-bold animate-pulse uppercase tracking-widest w-full break-words box-border">
                 {error}
               </div>
             )}
-            <div className="pt-4">
+            <div className="pt-4 w-full">
               <Button
                 type="submit"
                 variant="primary"
                 isLoading={loading}
-                className="w-full py-4 font-title bg-brand-accent text-slate-950 hover:bg-brand-accent/90 tracking-widest uppercase shadow-lg shadow-brand-accent/10"
+                className="w-full py-4 font-title bg-brand-accent text-slate-950 hover:bg-brand-accent/90 tracking-widest uppercase shadow-lg shadow-brand-accent/10 text-xs sm:text-sm"
               >
                 {loading ? "PROCESSING..." : "INITIALIZE PROFILE"}
               </Button>
             </div>
           </form>
-          <div className="mt-8 text-center">
+
+          <div className="mt-8 text-center w-full">
             <Link
               to="/login"
-              className="text-terminal-sm font-terminal text-2xl hover:text-brand-accent dark:text-brand-accent hover:underline uppercase tracking-wider font-bold transition-colors"
+              className="text-[11px] sm:text-xs font-terminal text-grey-custom hover:text-brand-accent dark:text-brand-accent hover:underline uppercase tracking-wider font-bold transition-colors block w-full break-words"
             >
               [ Return to Authentication Terminal ]
             </Link>

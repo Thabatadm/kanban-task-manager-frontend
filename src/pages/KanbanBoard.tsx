@@ -206,11 +206,11 @@ export const KanbanBoard: React.FC = () => {
 
   return (
     <div className="w-full flex flex-col gap-6 font-main h-full">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-dashed border-border-grid-light dark:border-border-grid/40 pb-6">
-        <div className="flex items-center gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-dashed border-border-grid-light dark:border-border-grid/40 pb-6 w-full min-w-0">
+        <div className="flex items-center gap-4 min-w-0 flex-1 w-full">
           <button
             onClick={() => navigate("/projects")}
-            className="p-2.5 border border-border-grid-light dark:border-slate-800 hover:border-brand-accent/50 bg-bg-card-light dark:bg-bg-card-dark rounded-xl text-grey-custom hover:text-brand-accent transition-all duration-200 group"
+            className="p-2.5 border border-border-grid-light dark:border-slate-800 hover:border-brand-accent/50 bg-bg-card-light dark:bg-bg-card-dark rounded-xl text-grey-custom hover:text-brand-accent transition-all duration-200 group flex-shrink-0"
             title="Return to projects matrix"
           >
             <ArrowLeft
@@ -218,12 +218,14 @@ export const KanbanBoard: React.FC = () => {
               className="group-hover:-translate-x-0.5 transition-transform"
             />
           </button>
-          <div>
-            <div className="flex items-center gap-2 text-[10px] font-terminal text-grey-custom dark:text-grey-custom-dark uppercase tracking-widest mb-0.5">
-              <Terminal size={12} className="text-brand-accent" />
+
+          <div className="min-w-0 flex-1">
+            <div className="flex items-center gap-2 text-[9px] sm:text-[10px] font-terminal text-grey-custom dark:text-grey-custom-dark uppercase tracking-widest mb-0.5 w-full">
+              <Terminal size={12} className="text-brand-accent flex-shrink-0" />
               <span>ID PROJECT / #{numericProjectId}</span>
             </div>
-            <h1 className="text-title-main font-title text-black dark:text-white uppercase tracking-tighter max-w-xl truncate">
+
+            <h1 className="text-lg sm:text-xl md:text-2xl lg:text-title-main font-title text-black dark:text-white uppercase tracking-tighter w-full break-words">
               {project ? (
                 <>
                   Project /{" "}
@@ -240,7 +242,7 @@ export const KanbanBoard: React.FC = () => {
 
         <Button
           variant="primary"
-          className="flex items-center gap-2 px-4 py-2.5 text-xs uppercase tracking-widest font-title shadow-md shadow-brand-accent/10"
+          className="flex items-center justify-center gap-2 px-4 py-2.5 text-xs uppercase tracking-widest font-title shadow-md shadow-brand-accent/10 flex-shrink-0 sm:w-auto w-full"
           onClick={() => handleOpenCreate("TO_DO")}
         >
           <Plus size={14} strokeWidth={3} /> Deploy Task
@@ -279,7 +281,7 @@ export const KanbanBoard: React.FC = () => {
       )}
 
       <DragDropContext onDragEnd={handleDragEnd}>
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 items-start overflow-x-auto pb-4">
+        <div className="flex flex-row xl:grid xl:grid-cols-4 gap-4 items-start overflow-x-auto pb-4 w-full snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
           {COLUMNS.map((column) => {
             const columnCards = cards.filter((c) => c.status === column.id);
 
@@ -289,7 +291,7 @@ export const KanbanBoard: React.FC = () => {
                   <div
                     ref={provided.innerRef}
                     {...provided.droppableProps}
-                    className="flex flex-col max-h-[72vh] w-full bg-bg-sub-light/40 dark:bg-bg-sub-dark/10 border border-border-grid-light dark:border-border-grid/40 rounded-2xl p-4 overflow-hidden"
+                    className="flex flex-col max-h-[72vh] min-w-[85vw] sm:min-w-[45vw] xl:min-w-full bg-bg-sub-light/40 dark:bg-bg-sub-dark/10 border border-border-grid-light dark:border-border-grid/40 rounded-2xl p-4 overflow-hidden snap-center"
                   >
                     <div className="flex items-center justify-between mb-4 pb-2 border-b border-dashed border-border-grid-light dark:border-border-grid/40 flex-shrink-0">
                       <div className="flex items-center gap-2">

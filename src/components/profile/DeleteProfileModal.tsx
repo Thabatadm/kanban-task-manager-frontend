@@ -30,9 +30,9 @@ export const DeleteProfileModal: React.FC<DeleteProfileModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 font-main">
-      <div className="w-full max-w-md bg-bg-card-light dark:bg-bg-card-dark border border-red-500/30 dark:border-red-500/20 rounded-3xl p-8 shadow-[0_20px_50px_rgba(239,68,68,0.15)] text-center animate-fade-in">
-        <div className="inline-block p-4 rounded-2xl bg-red-500/10 border border-red-500/20 text-red-500 mb-4 animate-bounce">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 font-main box-border">
+      <div className="w-full max-w-md bg-bg-card-light dark:bg-bg-card-dark border border-red-500/30 dark:border-red-500/20 rounded-3xl p-5 sm:p-8 shadow-[0_20px_50px_rgba(239,68,68,0.15)] text-center animate-fade-in max-h-[calc(100vh-2rem)] overflow-y-auto box-border min-w-0">
+        <div className="inline-block p-4 rounded-2xl bg-red-500/10 border border-red-500/20 text-red-500 mb-4 animate-bounce flex-shrink-0">
           <svg
             className="w-10 h-10"
             fill="none"
@@ -48,28 +48,27 @@ export const DeleteProfileModal: React.FC<DeleteProfileModalProps> = ({
           </svg>
         </div>
 
-        <h2 className="text-title-main font-title text-red-500 uppercase tracking-widest mb-2">
+        <h2 className="text-xl sm:text-2xl md:text-title-main font-title text-red-500 uppercase tracking-widest mb-2 w-full break-words">
           CRITICAL WARNING
         </h2>
 
-        <p className="text-grey-custom dark:text-grey-custom-dark text-sm font-body italic mb-6">
+        <p className="text-grey-custom dark:text-grey-custom-dark text-sm font-body italic mb-6 w-full break-words">
           You are about to purge this operator profile from the central core.
           This action is irreversible. All data will be terminated.
         </p>
 
         {error && (
-          <div className="mb-4 p-3 bg-red-500/10 border border-red-500/30 text-red-400 text-terminal-sm font-terminal rounded-xl uppercase tracking-widest animate-pulse">
+          <div className="mb-4 p-3 bg-red-500/10 border border-red-500/30 text-red-400 text-terminal-sm font-terminal rounded-xl uppercase tracking-widest animate-pulse w-full box-border break-words">
             {error}
           </div>
         )}
-
-        <div className="flex gap-4">
+        <div className="flex flex-col sm:flex-row gap-3 w-full">
           <Button
             type="button"
             variant="secondary"
             onClick={onClose}
             disabled={loading}
-            className="w-1/2 uppercase tracking-wider font-title border border-border-grid-light dark:border-slate-700/50"
+            className="w-full sm:w-1/2 uppercase tracking-wider font-title border border-border-grid-light dark:border-slate-700/50 py-3 text-xs sm:text-sm order-2 sm:order-1"
           >
             Cancel
           </Button>
@@ -77,7 +76,7 @@ export const DeleteProfileModal: React.FC<DeleteProfileModalProps> = ({
             type="button"
             onClick={handleDelete}
             isLoading={loading}
-            className="w-1/2 bg-red-600 hover:bg-red-700 text-white rounded-xl py-3 font-title uppercase tracking-wider shadow-lg shadow-red-600/20"
+            className="w-full sm:w-1/2 bg-red-600 hover:bg-red-700 text-white rounded-xl py-3 font-title uppercase tracking-wider shadow-lg shadow-red-600/20 text-xs sm:text-sm order-1 sm:order-2"
           >
             Purge Profile
           </Button>

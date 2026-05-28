@@ -5,15 +5,15 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 }
 
 export const Input = ({ label, className, ...props }: InputProps) => (
-  <div className="w-full space-y-2">
+  <div className="w-full space-y-1.5 text-left box-border">
     {label && (
-      <label className="block text-terminal-sm font-weight-terminal text-slate-500 dark:text-slate-300 uppercase tracking-tighter ml-1">
+      <label className="block text-xs font-terminal text-slate-500 dark:text-slate-300 uppercase tracking-tighter ml-1 select-none">
         {label}
       </label>
     )}
     <input
       {...props}
-      className={`w-full px-5 py-4 bg-bg-main-light dark:bg-bg-sub-dark border border-border-grid rounded-xl text-black dark:text-white focus:ring-2 focus:ring-brand-accent outline-none transition-all placeholder:text-slate-400 dark:placeholder:text-slate-500 ${className}`}
+      className={`w-full px-4 py-2.5 sm:py-3.5 bg-bg-main-light dark:bg-bg-sub-dark border border-border-grid rounded-xl text-sm text-black dark:text-white focus:ring-2 focus:ring-brand-accent outline-none transition-all placeholder:text-slate-400 dark:placeholder:text-slate-500 box-border ${className}`}
     />
   </div>
 );

@@ -99,7 +99,7 @@ export const Card: React.FC<CardProps> = ({ card, onClick }) => {
   return (
     <div
       onClick={() => onClick?.(card)}
-      className={`group relative flex flex-col gap-3 p-4 rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer font-main overflow-hidden ${statusStyles.wrapper} ${positionBorderClass}`}
+      className={`group relative flex flex-col gap-3 p-4 rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer font-main overflow-hidden min-w-0 w-full box-border ${statusStyles.wrapper} ${positionBorderClass}`}
     >
       <div
         className={`absolute left-0 top-0 bottom-0 w-[4px] transition-all duration-200 opacity-0 group-hover:opacity-100 ${
@@ -115,46 +115,44 @@ export const Card: React.FC<CardProps> = ({ card, onClick }) => {
         }`}
       />
 
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between w-full">
         <span
-          className={`text-[9px] font-terminal uppercase tracking-wider px-2 py-0.5 rounded border transition-colors duration-200 ${priorityStyles.badge}`}
+          className={`text-[9px] font-terminal uppercase tracking-wider px-2 py-0.5 rounded border transition-colors duration-200 flex-shrink-0 ${priorityStyles.badge}`}
         >
           {card.priority}
         </span>
       </div>
 
-      <div className="space-y-1">
+      <div className="space-y-1 w-full min-w-0">
         <h4
-          className={`text-sm font-title text-black dark:text-white transition-colors line-clamp-1 uppercase tracking-tight ${statusStyles.accentText}`}
+          className={`text-sm font-title text-black dark:text-white transition-colors line-clamp-1 uppercase tracking-tight w-full break-words ${statusStyles.accentText}`}
         >
           {card.title}
         </h4>
-        <p className="text-xs text-grey-custom dark:text-grey-custom-dark font-body line-clamp-2 italic leading-relaxed">
+        <p className="text-xs text-grey-custom dark:text-grey-custom-dark font-body line-clamp-2 italic leading-relaxed w-full break-words">
           {card.description || "No specification provided."}
         </p>
       </div>
-
-      <div className="flex items-center justify-between pt-2 border-t border-dashed border-border-grid-light dark:border-border-grid/30 text-[11px] font-terminal">
-        <div className="flex items-center gap-1 text-grey-custom dark:text-grey-custom-dark">
+      <div className="flex items-center justify-between gap-2 pt-2 border-t border-dashed border-border-grid-light dark:border-border-grid/30 text-[11px] font-terminal w-full min-w-0 mt-auto">
+        <div className="flex items-center gap-1 text-grey-custom dark:text-grey-custom-dark flex-shrink-0">
           <Calendar size={12} className={statusStyles.iconColor} />
           <span className={!card.dueDate ? "text-grey-custom/40 italic" : ""}>
             {formattedDate}
           </span>
         </div>
-
-        <div className="flex items-center gap-1.5 max-w-[50%]">
+        <div className="flex items-center gap-1.5 max-w-[55%] min-w-0 balance-assignee">
           {card.assignee ? (
             <div
-              className="flex items-center gap-1 truncate bg-bg-sub-light dark:bg-bg-sub-dark px-2 py-0.5 rounded-lg border border-border-grid-light dark:border-slate-800/80 group-hover:border-indigo-500/20 transition-colors"
+              className="flex items-center gap-1 bg-bg-sub-light dark:bg-bg-sub-dark px-2 py-0.5 rounded-lg border border-border-grid-light dark:border-slate-800/80 group-hover:border-indigo-500/20 transition-colors min-w-0 w-full"
               title={`${card.assignee.name} ${card.assignee.lastName || ""}`}
             >
-              <UserIcon size={10} className="text-brand-accent" />
-              <span className="truncate text-black dark:text-white uppercase text-[10px] tracking-tight">
+              <UserIcon size={10} className="text-brand-accent flex-shrink-0" />
+              <span className="truncate text-black dark:text-white uppercase text-[10px] tracking-tight block">
                 {card.assignee.name}
               </span>
             </div>
           ) : (
-            <span className="text-[10px] text-grey-custom/40 italic tracking-tighter">
+            <span className="text-[10px] text-grey-custom/40 italic tracking-tighter flex-shrink-0">
               UNASSIGNED
             </span>
           )}

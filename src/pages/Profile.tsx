@@ -65,7 +65,7 @@ export const Profile: React.FC = () => {
       }
     };
 
-    loadProfile();
+    void loadProfile();
 
     return () => {
       isMounted = false;
@@ -102,12 +102,12 @@ export const Profile: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-bg-main-light dark:bg-bg-main-dark pt-24 p-4 flex flex-col items-center justify-center gap-6 font-main">
-      <div className="w-full max-w-2xl bg-bg-card-light dark:bg-bg-card-dark border border-border-grid-light dark:border-border-grid/60 rounded-3xl p-8 sm:p-12 shadow-[0_20px_50px_rgba(0,0,0,0.05)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.3)]">
-        <div className="flex flex-col items-center text-center mb-10 pb-8 border-b border-border-grid-light dark:border-border-grid/40">
-          <div className="p-5 rounded-3xl bg-brand-accent/10 border border-brand-accent/20 text-brand-accent mb-4 shadow-lg shadow-brand-accent/5">
+    <div className="min-h-screen bg-bg-main-light dark:bg-bg-main-dark pt-16 sm:pt-24 p-4 flex flex-col items-center justify-center gap-6 font-main w-full">
+      <div className="w-full max-w-2xl bg-bg-card-light dark:bg-bg-card-dark border border-border-grid-light dark:border-border-grid/60 rounded-3xl p-6 sm:p-12 shadow-[0_20px_50px_rgba(0,0,0,0.05)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.3)] box-border">
+        <div className="flex flex-col items-center text-center mb-10 pb-8 border-b border-border-grid-light dark:border-border-grid/40 w-full">
+          <div className="p-5 rounded-3xl bg-brand-accent/10 border border-brand-accent/20 text-brand-accent mb-4 shadow-lg shadow-brand-accent/5 flex-shrink-0">
             <svg
-              className="w-16 h-16"
+              className="w-12 h-12 sm:w-16 sm:h-16"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -120,12 +120,11 @@ export const Profile: React.FC = () => {
               />
             </svg>
           </div>
-
-          <h1 className="text-3xl font-title text-black dark:text-white uppercase tracking-wider">
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-title text-black dark:text-white uppercase tracking-wider w-full break-words">
             {userProfile.name}{" "}
             <span className="text-brand-accent">{userProfile.lastName}</span>
           </h1>
-          <p className="text-xs font-terminal text-grey-custom dark:text-grey-custom-dark italic mt-2 uppercase tracking-widest">
+          <p className="text-[10px] sm:text-xs font-terminal text-grey-custom dark:text-grey-custom-dark italic mt-2 uppercase tracking-widest w-full">
             Active Operator // ID:{" "}
             <span className="font-mono dark:text-brand-accent">
               {userProfile.id}
@@ -133,32 +132,31 @@ export const Profile: React.FC = () => {
           </p>
         </div>
 
-        <div className="space-y-4 mb-10 font-body">
-          <div className="p-4 bg-bg-main-light/40 dark:bg-bg-main-dark/30 border border-border-grid-light dark:border-border-grid/30 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-            <span className="text-[11px] font-terminal uppercase font-bold tracking-widest text-grey-custom dark:text-grey-custom-dark">
+        <div className="space-y-4 mb-10 font-body w-full">
+          <div className="p-4 bg-bg-main-light/40 dark:bg-bg-main-dark/30 border border-border-grid-light dark:border-border-grid/30 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-2 min-w-0 w-full">
+            <span className="text-[11px] font-terminal uppercase font-bold tracking-widest text-grey-custom dark:text-grey-custom-dark flex-shrink-0">
               Full Identity
             </span>
-            <span className="text-base font-medium text-black dark:text-white font-title tracking-wide">
+            <span className="text-sm sm:text-base font-medium text-black dark:text-white font-title tracking-wide break-words text-left sm:text-right w-full sm:w-auto">
               {userProfile.name} {userProfile.lastName}
             </span>
           </div>
-
-          <div className="p-4 bg-bg-main-light/40 dark:bg-bg-main-dark/30 border border-border-grid-light dark:border-border-grid/30 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-            <span className="text-[11px] font-terminal uppercase font-bold tracking-widest text-grey-custom dark:text-grey-custom-dark">
+          <div className="p-4 bg-bg-main-light/40 dark:bg-bg-main-dark/30 border border-border-grid-light dark:border-border-grid/30 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-2 min-w-0 w-full">
+            <span className="text-[11px] font-terminal uppercase font-bold tracking-widest text-grey-custom dark:text-grey-custom-dark flex-shrink-0">
               System Email
             </span>
-            <span className="text-base font-medium text-grey-custom dark:text-brand-accent font-mono select-all tracking-wide">
+            <span className="text-sm sm:text-base font-medium text-grey-custom dark:text-brand-accent font-mono select-all tracking-wide break-all text-left sm:text-right w-full sm:w-auto">
               {userProfile.email}
             </span>
           </div>
         </div>
 
-        <div className="flex flex-col sm:flex-row gap-4 pt-2">
+        <div className="flex flex-col sm:flex-row gap-4 pt-2 w-full">
           <Button
             type="button"
             variant="primary"
+            className="w-full sm:w-1/2 py-4 uppercase tracking-wider font-title bg-brand-accent text-slate-950 hover:bg-brand-accent/90 shadow-lg shadow-brand-accent/10 text-xs sm:text-sm"
             onClick={() => setIsEditModalOpen(true)}
-            className="w-full sm:w-1/2 py-4 uppercase tracking-wider font-title bg-brand-accent text-slate-950 hover:bg-brand-accent/90 shadow-lg shadow-brand-accent/10"
           >
             Modify Profile
           </Button>
@@ -166,32 +164,32 @@ export const Profile: React.FC = () => {
           <button
             type="button"
             onClick={() => setIsDeleteModalOpen(true)}
-            className="w-full sm:w-1/2 py-4 rounded-xl border border-red-500/30 bg-red-500/5 text-red-500 hover:bg-red-500/10 transition-all font-title text-sm uppercase tracking-wider"
+            className="w-full sm:w-1/2 py-4 rounded-xl border border-red-500/30 bg-red-500/5 text-red-500 hover:bg-red-500/10 transition-all font-title text-xs sm:text-sm uppercase tracking-wider"
           >
             Terminate Account
           </button>
         </div>
       </div>
       {userProfile.projects && userProfile.projects.length > 0 && (
-        <div className="w-full max-w-2xl bg-bg-card-light dark:bg-bg-card-dark border border-border-grid-light dark:border-border-grid/50 rounded-3xl p-6 shadow-sm">
+        <div className="w-full max-w-2xl bg-bg-card-light dark:bg-bg-card-dark border border-border-grid-light dark:border-border-grid/50 rounded-3xl p-6 shadow-sm box-border">
           <h3 className="text-[11px] font-terminal uppercase font-bold tracking-widest text-grey-custom dark:text-grey-custom-dark mb-4">
             // Assigned Core Projects
           </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full">
             {userProfile.projects.map((item) => (
               <Link
                 key={item.id}
                 to={`/projects/${item.project.id}`}
-                className="p-3 bg-bg-main-light/50 dark:bg-bg-main-dark/40 border border-border-grid-light dark:border-border-grid/20 rounded-xl text-sm font-medium text-black dark:text-white hover:border-brand-accent/40 hover:text-brand-accent transition-all flex items-center justify-between gap-4 group"
+                className="p-3 bg-bg-main-light/50 dark:bg-bg-main-dark/40 border border-border-grid-light dark:border-border-grid/20 rounded-xl text-sm font-medium text-black dark:text-white hover:border-brand-accent/40 hover:text-brand-accent transition-all flex items-center justify-between gap-4 group min-w-0"
               >
-                <span className="flex items-center gap-2 font-body tracking-wide group-hover:translate-x-0.5 transition-transform">
-                  <span className="text-brand-accent/70 group-hover:text-brand-accent transition-colors">
+                <span className="flex items-center gap-2 font-body tracking-wide group-hover:translate-x-0.5 transition-transform min-w-0 flex-1 break-words">
+                  <span className="text-brand-accent/70 group-hover:text-brand-accent transition-colors flex-shrink-0">
                     📁
                   </span>{" "}
                   {item.project.name}
                 </span>
 
-                <span className="text-[10px] px-2 py-0.5 bg-bg-sub-dark rounded  dark:bg-brand-accent/10 border border-brand-accent/20 text-brand-accent font-mono uppercase tracking-wider">
+                <span className="text-[10px] px-2 py-0.5 bg-bg-sub-dark rounded dark:bg-brand-accent/10 border border-brand-accent/20 text-brand-accent font-mono uppercase tracking-wider flex-shrink-0">
                   {item.role}
                 </span>
               </Link>
@@ -199,6 +197,7 @@ export const Profile: React.FC = () => {
           </div>
         </div>
       )}
+
       {isEditModalOpen && (
         <EditProfileModal
           currentUser={userProfile}

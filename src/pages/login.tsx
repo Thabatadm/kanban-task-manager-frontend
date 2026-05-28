@@ -48,10 +48,10 @@ const Login = () => {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen flex items-center justify-center bg-bg-main-light dark:bg-bg-main-dark pt-20 p-4 font-main">
-        <div className="w-full max-w-md bg-bg-card-light dark:bg-bg-card-dark border border-border-grid-light dark:border-border-grid/60 rounded-3xl p-8 sm:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.05)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.3)] animate-fade-in">
-          <div className="text-center mb-8">
-            <div className="inline-block p-4 rounded-2xl bg-brand-accent/10 border border-brand-accent/20 text-brand-accent mb-4 shadow-lg shadow-brand-accent/5">
+      <div className="min-h-screen flex items-center justify-center bg-bg-main-light dark:bg-bg-main-dark pt-24 p-4 font-main w-full box-border">
+        <div className="w-full max-w-md bg-bg-card-light dark:bg-bg-card-dark border border-border-grid-light dark:border-border-grid/60 rounded-3xl p-6 sm:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.05)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.3)] animate-fade-in box-border min-w-0">
+          <div className="text-center mb-8 w-full">
+            <div className="inline-block p-4 rounded-2xl bg-brand-accent/10 border border-brand-accent/20 text-brand-accent mb-4 shadow-lg shadow-brand-accent/5 flex-shrink-0">
               <svg
                 className="w-8 h-8"
                 fill="none"
@@ -66,22 +66,20 @@ const Login = () => {
                 />
               </svg>
             </div>
-
-            <h1 className="text-title-main font-title text-black dark:text-white tracking-wider uppercase">
+            <h1 className="text-xl sm:text-2xl md:text-title-main font-title text-black dark:text-white tracking-wider uppercase w-full break-words">
               Kanban <span className="text-brand-accent">Flow</span>
             </h1>
-            <p className="text-xs font-terminal text-grey-custom dark:text-grey-custom-dark mt-2 italic uppercase tracking-widest">
+            <p className="text-[10px] sm:text-xs font-terminal text-grey-custom dark:text-grey-custom-dark mt-2 italic uppercase tracking-widest w-full break-words">
               Secure Terminal Access
             </p>
           </div>
-
           {successMessage && !error && (
-            <div className="mb-6 p-3 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-terminal-sm font-terminal rounded-xl text-center uppercase tracking-wider animate-pulse">
+            <div className="mb-6 p-3 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-terminal-sm font-terminal rounded-xl text-center uppercase tracking-wider animate-pulse w-full break-words box-border">
               {successMessage}
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4 w-full">
             <Input
               label="System Email"
               type="email"
@@ -101,34 +99,33 @@ const Login = () => {
               required
               autoComplete="current-password"
             />
-
             {error && (
-              <div className="p-3 bg-red-500/10 border border-red-500/30 text-red-400 text-terminal-sm font-terminal rounded-xl text-center font-bold animate-pulse uppercase tracking-widest">
+              <div className="p-3 bg-red-500/10 border border-red-500/30 text-red-400 text-terminal-sm font-terminal rounded-xl text-center font-bold animate-pulse uppercase tracking-widest w-full break-words box-border">
                 {error}
               </div>
             )}
 
-            <div className="pt-4">
+            <div className="pt-4 w-full">
               <Button
                 type="submit"
                 variant="primary"
                 isLoading={loading}
-                className="w-full py-4 font-title bg-brand-accent text-slate-950 hover:bg-brand-accent/90 tracking-widest uppercase shadow-lg shadow-brand-accent/10"
+                className="w-full py-4 font-title bg-brand-accent text-slate-950 hover:bg-brand-accent/90 tracking-widest uppercase shadow-lg shadow-brand-accent/10 text-xs sm:text-sm"
               >
                 {loading ? "VERIFYING..." : "AUTHENTICATE"}
               </Button>
             </div>
           </form>
-          <div className="mt-8 text-center space-y-3">
-            <div>
+          <div className="mt-8 text-center space-y-3 w-full">
+            <div className="w-full">
               <Link
                 to="/register"
-                className="text-terminal-sm font-terminal text-grey-custom dark:text-brand-accent hover:text-brand-accent hover:underline uppercase tracking-wider font-bold transition-colors"
+                className="text-[11px] sm:text-xs font-terminal text-grey-custom dark:text-brand-accent hover:text-brand-accent hover:underline uppercase tracking-wider font-bold transition-colors block w-full break-words"
               >
                 [ Request New Operator Access ]
               </Link>
             </div>
-            <p className="text-[10px] font-terminal text-grey-custom dark:text-grey-custom-dark/40 uppercase tracking-widest">
+            <p className="text-[9px] sm:text-[10px] font-terminal text-grey-custom dark:text-grey-custom-dark/40 uppercase tracking-widest w-full break-words">
               Authorized Personnel Only
             </p>
           </div>
